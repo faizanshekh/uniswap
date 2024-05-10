@@ -1,0 +1,91 @@
+/* General body styles */
+body {
+    background: #000; /* Set background color */
+}
+
+/* Styles for card container */
+.card {
+    box-shadow: 2px 2px 0px rgb(45, 55, 72); /* Add box shadow */
+    background: #1a212a; /* Set background color */
+    margin: auto; /* Center the card */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    padding: 20px; /* Add padding */
+    border-radius: 24px; /* Add border radius */
+    border: 1px solid #1a212a; /* Add border */
+    z-index: 1; /* Set lower z-index for card */
+    flex-wrap: wrap; /* Allow content to wrap */
+}
+
+/* Styles for page wrapper */
+.page-wrapper {
+    background-image: url('/assets/img/banner/bg-full.png'); /* Set background image */
+    background-repeat: no-repeat; /* Prevent image from repeating */
+    background-size: cover; /* Cover entire container */
+    height: 120vh; /* Set height */
+    z-index: 2; /* Ensure page content is below spinner and overlay */
+    position: relative; /* Set position to relative */
+}
+
+/* Input styles */
+input {
+    background: transparent !important; /* Set input background to transparent */
+    border: 1px solid #fff !important; /* Set input border */
+    border-radius: 20px !important; /* Set border radius */
+    color: #fff !important; /* Set text color */
+}
+
+/* Styles for swap section */
+.swap-sec {
+    padding: 60px 0; /* Add padding */
+}
+
+/* Styles for cryptocurrency inputs */
+#Crypto-one,
+#Crypto-two {
+    color: #000; /* Set text color */
+    border-radius: 20px; /* Set border radius */
+}
+
+/* Styles for modal backdrop */
+.modal-backdrop {
+    display: none; /* Hide modal backdrop */
+}
+
+/* Container for swap section heading */
+.swap-container h3 {
+    text-align: center; /* Center align heading */
+    color: #fff; /* Set text color */
+}
+
+/* Placeholder styles for amount inputs */
+#amountInput-one::placeholder,
+#amountInput-two::placeholder {
+    color: #616161; /* Set placeholder text color */
+}
+
+/* Styles for overlay */
+#overlay {
+    position: fixed; /* Set position to fixed */
+    top: 0; /* Position from top */
+    left: 0; /* Position from left */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    backdrop-filter: blur(5px); /* Apply blur effect */
+    display: none; /* Hide initially */
+    z-index: 3; /* Ensure overlay is on top of other elements */
+}
+
+/* Styles for spinner */
+#spinner {
+    position: absolute; /* Set position to absolute */
+    top: 50%; /* Position from top */
+    left: 50%; /* Position from left */
+    z-index: 4; /* Ensure spinner is on top of overlay */
+}
+
+/* Adjustments to ensure spinner is on top */
+.spinner-border {
+    z-index: 2; /* Set z-index */
+}
