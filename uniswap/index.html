@@ -20,7 +20,7 @@
     <!-- Header -->
 
     <div id="overlay">
-      <div id="spinner" class="spinner-border text-light" role="status">
+      <div id="spinner" class="spinner-border text-dark display-1" role="status">
 
       </div>
     </div>
@@ -33,7 +33,7 @@
           <div class="col-lg-5 col-12">
             <div class="card">
               <div class="content">
-                <div class="Crypto">
+                <div class="Crypto mb-4 mb-lg-1">
                   <div class="row justify-content-between align-items-center">
                     <div class="col-md-4">
                       <div>
@@ -45,11 +45,10 @@
                     <div class="col-md-4">
                       <select id="Crypto-one" class="form-select" aria-label="Default select example" aria-describedby="amountInput-one">
                         <option>Select</option>
-                        <option value="solana">Solana</option>
                         <option value="ethereum" selected>Ethereum</option>
                         <option value="bitcoin">Bitcoin</option>
                         <option value="cardano">Cardano</option>
-                        <option value="dai">DAI</option>
+                        <option value="dai" >DAI</option>
                         <option value="binancecoin">Binance Coin</option>
                         <option value="ripple">Ripple</option>
                         <option value="polkadot">Polkadot</option>
@@ -57,6 +56,7 @@
                         <option value="chainlink">Chainlink</option>
                         <option value="litecoin">Litecoin</option>
                         <option value="stellar">Stellar</option>
+                        
                       </select>
                     </div>
                   </div>
@@ -64,14 +64,14 @@
 
                 <div class="row">
                   <div class="col-12">
-                    <div class="swap-rate d-flex justify-content-between my-3">
+                    <div class="swap-rate d-flex justify-content-between mb-lg-4 mb-3">
                       <button type="button" class="btn btn-success" id="swap">Swap</button>
                       <div class="rate text-light" id="rate"></div>
                     </div>
                   </div>
                 </div>
 
-                <div class="Crypto">
+                <div class="Crypto mb-4 mb-lg-0">
                   <div class="row justify-content-between align-items-center">
                     <div class="col-md-4">
                       <label for="amountInput-two" class="text-secondary fs-5 mb-2">You Receive</label>
@@ -81,7 +81,6 @@
                     <div class="col-md-4">
                       <select id="Crypto-two" class="form-select" aria-label="Default select example" aria-describedby="amountInput-two">
                         <option selected>Select</option>
-                        <option value="solana">Solana</option>
                         <option value="ethereum">Ethereum</option>
                         <option value="bitcoin">Bitcoin</option>
                         <option value="cardano">Cardano</option>
@@ -93,13 +92,14 @@
                         <option value="chainlink">Chainlink</option>
                         <option value="litecoin">Litecoin</option>
                         <option value="stellar">Stellar</option>
+                        
                       </select>
                     </div>
                   </div>
                 </div>
                 <div class="d-flex justify-content-center my-2">
                 <!-- Add a button to trigger the transaction history modal -->
-                <button id="showTransactionHistoryButton" class="btn btn-outline-light" type="button" data-bs-toggle="modal" data-bs-target="#transactionHistoryModal">Transaction History</button>
+                <button id="showTransactionHistoryButton" class="btn btn-outline-light px-5 py-2" type="button" data-bs-toggle="modal" data-bs-target="#transactionHistoryModal">Transaction History</button>
 
                 </div>
               <div id="message" class="text-danger"></div>
@@ -118,20 +118,22 @@
             <button type="button" class="btn-close"  data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Token Name</th>
-                  <th scope="col">You Paid</th>
-                  <th scope="col">Token Name</th>
-                  <th scope="col">You Receive</th>
-                </tr>
-              </thead>
-              <tbody id="transactionHistoryTableBody">
-                <!-- Transaction history rows will be inserted here dynamically -->
-              </tbody>
-            </table>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Token Name</th>
+                    <th scope="col">You Paid</th>
+                    <th scope="col">Token Name</th>
+                    <th scope="col">You Receive</th>
+                  </tr>
+                </thead>
+                <tbody id="transactionHistoryTableBody">
+                  <!-- Transaction history rows will be inserted here dynamically -->
+                </tbody>
+              </table>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
