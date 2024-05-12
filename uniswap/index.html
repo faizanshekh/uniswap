@@ -1,152 +1,254 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Uniswap Page</title>
-  <!-- Favicon -->
-  <link rel="icon" href="/assets/img/favicon/192x192_App_Icon.png" type="image/x-icon">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Uniswap Page</title>
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      href="/assets/img/favicon/192x192_App_Icon.png"
+      type="image/x-icon"
+    />
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
 
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="/assets/css/style.css">
-</head>
-<body id="home" class="homePage">
-  <!-- WRAPPER -->
-  <div class="page-wrapper">
-    <!-- Header -->
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css" />
+  </head>
+  <body id="home" class="homePage">
+    <!-- WRAPPER -->
+    <div class="page-wrapper">
+      <!-- Header -->
 
-    <div id="overlay">
-      <div id="spinner" class="spinner-border text-dark display-1" role="status">
-
+      <div id="overlay">
+        <div
+          id="spinner"
+          class="spinner-border text-light "
+          role="status"
+        ></div>
       </div>
-    </div>
 
-    <section class="swap-sec">
-      <div class="swap-container container">
-        <div class="row  gap-4 justify-content-center">
-          <h3>Swap anytime, anywhere.</h3>
-          
-          <div class="col-lg-5 col-12">
-            <div class="card">
-              <div class="content">
-                <div class="Crypto mb-4 mb-lg-1">
-                  <div class="row justify-content-between align-items-center">
-                    <div class="col-md-4">
-                      <div>
-                        <label for="amountInput-one" class="text-secondary fs-5 mb-2">You pay</label>
-                        <input type="number" class="form-control" id="amountInput-one" placeholder="0" value="1">
-                        <div id="outputOne" class="text-secondary my-2" style="visibility: hidden;"><span>$</span>0</div>
+      <section class="swap-sec">
+        <div class="swap-container container">
+          <div class="row gap-4 justify-content-center">
+            <h3>Swap anytime, anywhere.</h3>
+
+            <div class="col-lg-5 col-12">
+              <div class="card">
+                <div class="content">
+                  <div class="Crypto mb-4 mb-lg-1">
+                    <div class="row justify-content-between align-items-center">
+                      <div id="message" class="text-danger"></div>
+                      <div class="col-md-4">
+
+                        <div>
+                          <label
+                            for="amountInput-one"
+                            class="text-secondary fs-5 mb-2"
+                            >You pay</label
+                          >
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="amountInput-one"
+                            placeholder="0"
+                            value="1"
+                          />
+                          <div
+                            id="outputOne"
+                            class="text-secondary my-2"
+                            style="visibility: hidden"
+                          >
+                            <span>$</span>0
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <select
+                          id="Crypto-one"
+                          class="form-select"
+                          aria-label="Default select example"
+                          aria-describedby="amountInput-one"
+                        >
+                          <option>Select</option>
+                          <option value="ethereum" selected>Ethereum</option>
+                          <option value="solana">Solana</option>
+                          <option value="bitcoin">Bitcoin</option>
+                          <option value="cardano">Cardano</option>
+                          <option value="dai">DAI</option>
+                          <option value="binancecoin">Binance Coin</option>
+                          <option value="ripple">Ripple</option>
+                          <option value="polkadot">Polkadot</option>
+                          <option value="dogecoin">Dogecoin</option>
+                          <option value="chainlink">Chainlink</option>
+                          <option value="litecoin">Litecoin</option>
+                          <option value="stellar">Stellar</option>
+                        </select>
                       </div>
                     </div>
-                    <div class="col-md-4">
-                      <select id="Crypto-one" class="form-select" aria-label="Default select example" aria-describedby="amountInput-one">
-                        <option>Select</option>
-                        <option value="ethereum" selected>Ethereum</option>
-                        <option value="bitcoin">Bitcoin</option>
-                        <option value="cardano">Cardano</option>
-                        <option value="dai" >DAI</option>
-                        <option value="binancecoin">Binance Coin</option>
-                        <option value="ripple">Ripple</option>
-                        <option value="polkadot">Polkadot</option>
-                        <option value="dogecoin">Dogecoin</option>
-                        <option value="chainlink">Chainlink</option>
-                        <option value="litecoin">Litecoin</option>
-                        <option value="stellar">Stellar</option>
-                        
-                      </select>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-12">
+                      <div
+                        class="swap-rate d-flex justify-content-between mb-lg-4 mb-3"
+                      >
+                        <button
+                          type="button"
+                          class="btn btn-outline-success text-light px-5"
+                          id="swap"
+                        >
+                          Swap
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-success px-5"
+                          id="execute"
+                        >
+                          Execute
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="Crypto mb-4 mb-lg-0">
+                    <div class="row justify-content-between align-items-center">
+                      <div class="col-md-4">
+                        <label
+                          for="amountInput-two"
+                          class="text-secondary fs-5 mb-2"
+                          >You Receive</label
+                        >
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="amountInput-two"
+                          placeholder="0"
+                        />
+                        <div
+                          id="outputTwo"
+                          class="text-secondary my-2"
+                          style="visibility: hidden"
+                        >
+                          <span>$</span>0
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <select
+                          id="Crypto-two"
+                          class="form-select"
+                          aria-label="Default select example"
+                          aria-describedby="amountInput-two"
+                        >
+                          <option selected>Select</option>
+                          <option value="ethereum">Ethereum</option>
+                          <option value="solana">Solana</option>
+                          <option value="bitcoin">Bitcoin</option>
+                          <option value="cardano">Cardano</option>
+                          <option value="dai">DAI</option>
+                          <option value="binancecoin">Binance Coin</option>
+                          <option value="ripple">Ripple</option>
+                          <option value="polkadot">Polkadot</option>
+                          <option value="dogecoin">Dogecoin</option>
+                          <option value="chainlink">Chainlink</option>
+                          <option value="litecoin">Litecoin</option>
+                          <option value="stellar">Stellar</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-8 px-0 col-12 d-flex justify-content-center justify-content-lg-start align-items-end">
+                      <div class="rate text-light ms-2" id="rate"></div>
+                      
+                    </div>
+                    <div class="col-lg-4 col-12 d-flex ps-0 justify-content-center justify-content-lg-end">
+                          <button
+                      id="showTransactionHistoryButton"
+                      class="btn btn-outline-success"
+                      type="button"
+                      data-bs-toggle="modal"
+                      data-bs-target="#transactionHistoryModal"
+                    >
+                      Tran. History
+                    </button>
                     </div>
                   </div>
                 </div>
-
-                <div class="row">
-                  <div class="col-12">
-                    <div class="swap-rate d-flex justify-content-between mb-lg-4 mb-3">
-                      <button type="button" class="btn btn-success" id="swap">Swap</button>
-                      <div class="rate text-light" id="rate"></div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="Crypto mb-4 mb-lg-0">
-                  <div class="row justify-content-between align-items-center">
-                    <div class="col-md-4">
-                      <label for="amountInput-two" class="text-secondary fs-5 mb-2">You Receive</label>
-                      <input type="number" class="form-control" id="amountInput-two" placeholder="0">
-                      <div id="outputTwo" class="text-secondary my-2" style="visibility: hidden;"><span>$</span>0</div>
-                    </div>
-                    <div class="col-md-4">
-                      <select id="Crypto-two" class="form-select" aria-label="Default select example" aria-describedby="amountInput-two">
-                        <option selected>Select</option>
-                        <option value="ethereum">Ethereum</option>
-                        <option value="bitcoin">Bitcoin</option>
-                        <option value="cardano">Cardano</option>
-                        <option value="dai" >DAI</option>
-                        <option value="binancecoin">Binance Coin</option>
-                        <option value="ripple">Ripple</option>
-                        <option value="polkadot">Polkadot</option>
-                        <option value="dogecoin">Dogecoin</option>
-                        <option value="chainlink">Chainlink</option>
-                        <option value="litecoin">Litecoin</option>
-                        <option value="stellar">Stellar</option>
-                        
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="d-flex justify-content-center my-2">
-                <!-- Add a button to trigger the transaction history modal -->
-                <button id="showTransactionHistoryButton" class="btn btn-outline-light px-5 py-2" type="button" data-bs-toggle="modal" data-bs-target="#transactionHistoryModal">Transaction History</button>
-
-                </div>
-              <div id="message" class="text-danger"></div>
-
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <div class="modal fade" id="transactionHistoryModal" tabindex="-1" aria-labelledby="transactionHistoryModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="transactionHistoryModalLabel">Transaction History</h5>
-            <button type="button" class="btn-close"  data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Token Name</th>
-                    <th scope="col">You Paid</th>
-                    <th scope="col">Token Name</th>
-                    <th scope="col">You Receive</th>
-                  </tr>
-                </thead>
-                <tbody id="transactionHistoryTableBody">
-                  <!-- Transaction history rows will be inserted here dynamically -->
-                </tbody>
-              </table>
+      </section>
+      <div
+        class="modal fade"
+        id="transactionHistoryModal"
+        tabindex="-1"
+        aria-labelledby="transactionHistoryModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="transactionHistoryModalLabel">
+                Transaction History
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
+            <div class="modal-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Token Name</th>
+                      <th scope="col">You Paid</th>
+                      <th scope="col">Token Name</th>
+                      <th scope="col">You Receive</th>
+                    </tr>
+                  </thead>
+                  <tbody id="transactionHistoryTableBody">
+                    <!-- Transaction history rows will be inserted here dynamically -->
+                  </tbody>
+                </table>
+              </div>
+              <div class="row">
+                <div class="col-12 my-3 d-flex justify-content-end">
+                <button class="btn btn-outline-danger" id="Clear">Clear history</button>
+  
+                </div>
+              </div>
+            </div>
+         
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- WRAPPER END -->
-  <!-- Bootstrap Bundle JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- WRAPPER END -->
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Custom JS -->
-  <script type="module" src="/assets/js/custom.js"></script>
-</body>
+    <!-- Custom JS -->
+    <script type="module" src="/assets/js/custom.js"></script>
+  </body>
 </html>

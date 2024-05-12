@@ -7,8 +7,7 @@ const rate = document.getElementById("rate");
 const swapButton = document.getElementById("swap");
 const outputOne = document.getElementById("outputOne");
 const outputTwo = document.getElementById("outputTwo");
-const executeTransactionButton = document.getElementById("execute"); // Corrected variable name
-const clearButton = document.getElementById("Clear"); // Added clear button variable
+const executeTran = document.getElementById("execute"); // Corrected variable name
 const transactionHistory = JSON.parse(localStorage.getItem("transactionHistory")) || []; // Retrieve transaction history from local storage
 
 let firstCurrCurrentPrice; // Store current price of the first cryptocurrency
@@ -61,33 +60,12 @@ async function calculate() {
     if (firstCurrCurrentPrice) {
       showMessage("Transaction Started!", "success"); // Show success message
     }
+
     outputOne.style.visibility = "visible";
-    outputOne.innerText = "$" + (firstCurrCurrentPrice * amountInputOne.value).toFixed(2); // Update output
-    
-  } catch (error) {
-    // Error handling...
-    showLoading(); // Show loading spinner
-    showMessage("Please wait for a minute...", "error"); // Show error message
-  } finally {
-    hideLoading(); // Hide loading spinner
-  }
-}
+    outputOne.innerText =
+      "$" + (firstCurrCurrentPrice * amountInputOne.value).toFixed(2); // Update output
 
-// Function to execute transaction
-async function executeTransaction() {
-  try {
-    // Fetch data for the second cryptocurrency
-    currTwo = CryptoTwo.value; // Get second cryptocurrency
-    secondCurrCurrentPrice = await fetchData(currTwo);
-    console.log(secondCurrCurrentPrice)
-    amountInputTwo.value = (firstCurrCurrentPrice / secondCurrCurrentPrice) * amountInputOne.value;
-    outputTwo.style.visibility = "visible";
-    outputTwo.innerText = "$" + ( amountInputTwo.value * secondCurrCurrentPrice).toFixed(2) ;
-    // console.log(secondCurrCurrentPrice * amountInputOne.value)
-    // Calculate conversion rate and update input
-    rate.innerText = `1 ${currOne} = ${firstCurrCurrentPrice / secondCurrCurrentPrice } ${currTwo}`;
-
-    // Update transaction history modal
+    // Add transaction to transaction history
     const transaction = {
       CryptoOne: currOne,
       amountOne: amountInputOne.value,
@@ -95,43 +73,72 @@ async function executeTransaction() {
       amountTwo: amountInputTwo.value,
     };
     transactionHistory.push(transaction); // Store transaction
-    populateTransactionHistoryModal();
-    
-    // Store transaction history data in local storage
-    localStorage.setItem("transactionHistory", JSON.stringify(transactionHistory));
+    executeTransaction();
+
+    // Rest of the calculation logic...
   } catch (error) {
     // Error handling...
-    showLoading(); // Show loading spinner
-    showMessage("Please wait for a minute...", "error"); // Show error message
-  }finally {
+    if (!outputOne.innerText) {
+      showLoading(); // Show loading spinner
+      showMessage("Please wait for a minute...", "error");
+    } // Show error message
+  } finally {
     hideLoading(); // Hide loading spinner
+  }
+}
+
+async function executeTransaction() {
+  try {
+    // Fetch data for the second cryptocurrency
+    currTwo = CryptoTwo.value; // Get second cryptocurrency
+    secondCurrCurrentPrice = await fetchData(currTwo);
+    outputTwo.style.visibility = "visible";
+    outputTwo.innerText =
+      "$" + (secondCurrCurrentPrice * amountInputOne.value).toFixed(2); // Update output
+
+    // Calculate conversion rate and update input
+    amountInputTwo.value =
+      (firstCurrCurrentPrice / secondCurrCurrentPrice) * amountInputOne.value;
+    rate.innerText = `1 ${currOne} = ${
+      firstCurrCurrentPrice / secondCurrCurrentPrice
+    } ${currTwo}`;
+    rate.toFixed(2);
+
+    // Update transaction history modal
+    populateTransactionHistoryModal();
+  } catch (error) {
+    // Error handling...
+    if (!outputOne.innerText) {
+      showMessage("Please wait for a minute...", "error");
+    }
   }
 }
 
 // Function to swap currencies
 function swapCurrencies() {
-  // Swap cryptocurrencies
-  if(outputTwo.innerText) {
-    const temp = CryptoOne.value;
-    CryptoOne.value = CryptoTwo.value;
-    CryptoTwo.value = temp;
-    // Swap amounts
-    const tempo = amountInputOne.value;
-    amountInputOne.value = amountInputTwo.value;
-    amountInputTwo.value = tempo;
-    // Swap outputs
-    const temporary = outputOne.innerText;
-    outputOne.innerText = outputTwo.innerText;
-    outputTwo.innerText = temporary;
-    // Update conversion rate
-    rate.innerText = `1 ${CryptoOne.value} = ${
-      secondCurrCurrentPrice / firstCurrCurrentPrice
-    } ${CryptoTwo.value}`;
-    showMessage("Swap successfully.", "success"); // Show success message
-    calculate()
-    executeTransaction()
-    populateTransactionHistoryModal()
+  // Check if amounts are valid
+  if (!amountInputOne.value || !amountInputTwo.value) {
+    showMessage("Please enter valid amounts."); // Show error message
+    return;
   }
+  // Swap cryptocurrencies
+  const temp = CryptoOne.value;
+  CryptoOne.value = CryptoTwo.value;
+  CryptoTwo.value = temp;
+  // Swap amounts
+  const tempo = amountInputOne.value;
+  amountInputOne.value = amountInputTwo.value;
+  amountInputTwo.value = tempo;
+  // Swap outputs
+  const temporary = outputOne.innerText;
+  outputOne.innerText = outputTwo.innerText;
+  outputTwo.innerText = temporary;
+  // Update conversion rate
+  rate.innerText = `1 ${CryptoOne.value} = ${
+    secondCurrCurrentPrice / firstCurrCurrentPrice
+  } ${CryptoTwo.value}`;
+  calculate();
+  executeTransaction();
 }
 
 // Function to show message
@@ -146,15 +153,9 @@ function showMessage(message, type = "error") {
 CryptoOne.addEventListener("change", calculate);
 amountInputOne.addEventListener("input", calculate);
 swapButton.addEventListener("click", swapCurrencies);
-executeTransactionButton.addEventListener("click", executeTransaction);
-clearButton.addEventListener("click", clearHistory); // Added event listener for clear button
-calculate(); // Initial calculation
+executeTran.addEventListener("click", executeTransaction);
 
-function clearHistory() {
-  transactionHistory.length = 0;
-  populateTransactionHistoryModal();
-  localStorage.setItem("transactionHistory", JSON.stringify(transactionHistory));
-}
+calculate(); // Initial calculation
 
 // Function to populate transaction history modal
 function populateTransactionHistoryModal() {
@@ -167,15 +168,17 @@ function populateTransactionHistoryModal() {
     transactionHistory.forEach((transaction, index) => {
       const row = `
           <tr>
-          <th scope="row">${index + 1}</th>
-          <td>${transaction.CryptoOne}</td>
-          <td>${transaction.amountOne}</td>
-          <td>${transaction.CryptoTwo}</td>
-          <td>${transaction.amountTwo}</td>
-      </tr>
+              <th scope="row">${index + 1}</th>
+              <td>${transaction.CryptoOne}</td>
+              <td>${transaction.amountOne}</td>
+              <td>${transaction.CryptoTwo}</td>
+              <td>${transaction.amountTwo}</td>
+          </tr>
       `;
       modalBody.insertAdjacentHTML("beforeend", row);
     });
+    // Store transaction history data in local storage
+    localStorage.setItem("transactionHistory", JSON.stringify(transactionHistory));
   }
 }
 

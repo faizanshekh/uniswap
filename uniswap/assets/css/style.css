@@ -71,8 +71,7 @@ input {
     left: 0; /* Position from left */
     width: 100%; /* Full width */
     height: 100%; /* Full height */
-    background-color: #fff; /* Semi-transparent black background */
-    /* backdrop-filter: blur(5px); */
+    backdrop-filter: blur(5px);
     display: none; /* Hide initially */
     z-index: 3; /* Ensure overlay is on top of other elements */
 }
